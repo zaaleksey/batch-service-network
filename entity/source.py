@@ -1,4 +1,4 @@
-from demand import Demand
+from .demand import Demand
 
 
 class Source:

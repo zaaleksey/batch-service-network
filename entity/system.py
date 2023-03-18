@@ -1,14 +1,14 @@
 from random import expovariate, randrange
 
-from batch import Batch
+from .batch import Batch
 
 
-class Server:
+class System:
     __COUNT = 0
 
     def __init__(self, mu: float, batch: int) -> None:
-        Server.__COUNT += 1
-        self.id = Server.__COUNT
+        System.__COUNT += 1
+        self.id = System.__COUNT
 
         self.queue = []
         self.batch = Batch(batch)
