@@ -6,15 +6,15 @@ from simulation import Simulation
 if __name__ == '__main__':
     lambda0 = .74
     servers_count = 5
-    mu = [1.1, 1.2, 1.4, 1.3, 1.2]
+    mu = [2.1, 2.2, 2.4, 2.3, 2.2]
     batch = [1, 3, 2, 2, 3]
     theta = [
         [.0, .2, .1, .3, .0, .4],
-        [.2, .0, .3, .0, .3, .2],
-        [.2, .3, .0, .2, .0, .3],
+        [.4, .0, .2, .0, .2, .2],
+        [.3, .3, .0, .2, .0, .2],
         [.0, .3, .4, .0, .1, .2],
         [.0, .1, .3, .2, .0, .4],
-        [.3, .1, .0, .3, .3, .0]
+        [.5, .0, .0, .3, .2, .0]
     ]
     links = get_links_by_theta(theta)
 
@@ -23,5 +23,6 @@ if __name__ == '__main__':
 
     model = Simulation(params=params, progress_bar=bar)
 
-    time = 1_000_000
+    # time = 1_000_000
+    time = 100_000
     model.run(simulation_time=time)

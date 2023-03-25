@@ -14,3 +14,9 @@ class Demand:
     @staticmethod
     def _reset_counter():
         Demand.__COUNT = 0
+
+    def __str__(self):
+        return f"{self.id}"
+
+    def __repr__(self):
+        return str(self)
