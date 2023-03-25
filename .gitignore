@@ -256,3 +256,5 @@ poetry.toml
 .ruff_cache/
 
 /BatchServiceNetwork.iml
+
+logging.log
