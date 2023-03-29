@@ -22,8 +22,12 @@ class System:
 
         self.is_free = False
         self.batch.form([self.queue.pop(randrange(len(self.queue))) for _ in range(self.batch.size)])
+        for demand in self.batch.demands:
+            demand.service_start_time = current_time
 
-        self.end_service_time = current_time + expovariate(self.batch.size * self.mu)
+        # self.end_service_time = current_time + expovariate(self.batch.size * self.mu)
+        services_time = sum([expovariate(self.mu) for _ in range(self.batch.size)])
+        self.end_service_time = current_time + services_time
         return True
 
     def to_free(self) -> None:

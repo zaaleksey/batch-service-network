@@ -9,8 +9,8 @@ class Clock:
     service_start: float = float('inf')
     leaving: float = float('inf')
 
-    def update_arrival_time(self, lambda0: float) -> None:
-        self.arrival += expovariate(lambda0)
+    def update_arrival_time(self, rate: float) -> None:
+        self.arrival += expovariate(rate)
 
     @property
     def time_of_next_event(self):
