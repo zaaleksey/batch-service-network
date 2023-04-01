@@ -4,9 +4,11 @@ class Demand:
 
     def __init__(self, arrival_time: float) -> None:
         self.id = Demand.__COUNT
-        self.arrival_time = arrival_time
-        self.service_start_time = None
-        self.leaving_time = None
+        self.arrival_in_network_time = arrival_time
+        self.arrival_in_queue_times = []
+        self.service_start_times = []
+        self.service_end_times = []
+        self.leaving_from_network_time = None
 
         Demand.__COUNT += 1
 
