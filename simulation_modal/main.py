@@ -1,7 +1,7 @@
 from params import Params
 from progress.bar import ConsoleProgressBar
 from route.routing import get_links_by_theta
-from simulation import Simulation
+from simulation_modal.simulation import Simulation
 
 if __name__ == '__main__':
     # lambda0 = .5

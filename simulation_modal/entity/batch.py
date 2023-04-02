@@ -1,5 +1,5 @@
-from exception.batch_size_exception import BatchSizeException
 from .demand import Demand
+from .exception.batch_size_exception import BatchSizeException
 
 
 class Batch:

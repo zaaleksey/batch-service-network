@@ -7,7 +7,7 @@ from entity.system import System
 from params import Params
 from progress.bar import ProgressBar
 from route.routing import Routing
-from statistics import Statistics
+from .statistics import Statistics
 
 logging.basicConfig(filename="logging.log", level=logging.DEBUG, filemode="w")
 

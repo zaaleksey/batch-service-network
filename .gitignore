@@ -257,4 +257,4 @@ poetry.toml
 
 /BatchServiceNetwork.iml
 
-logging.log
+simulation_modal/logging.log
