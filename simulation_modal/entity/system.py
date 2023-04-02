@@ -17,6 +17,8 @@ class System:
         self.is_free = True
         self.end_service_time = float('-inf')
 
+        self.service_times_for_demands = []
+
     def try_occupy(self, current_time: float) -> bool:
         if not self.can_occupy:
             return False
@@ -26,9 +28,9 @@ class System:
         for demand in self.batch.demands:
             demand.service_start_times.append(current_time)
 
-        # self.end_service_time = current_time + expovariate(self.batch.size * self.mu)
-        services_time = sum([expovariate(self.mu) for _ in range(self.batch.size)])
-        self.end_service_time = current_time + services_time
+        self.end_service_time = current_time + expovariate(self.batch.size * self.mu)
+        # services_time = sum([expovariate(self.mu) for _ in range(self.batch.size)])
+        # self.end_service_time = current_time + services_time
         return True
 
     def add_to_queue(self, demand: Demand, current_time: float) -> None:
@@ -39,6 +41,8 @@ class System:
         self.is_free = True
         for demand in self.batch.demands:
             demand.service_end_times.append(current_time)
+            self.service_times_for_demands.append(demand.service_end_times[-1] - demand.arrival_in_queue_times[-1])
+
         self.batch.clear()
         self.end_service_time = float('-inf')
 

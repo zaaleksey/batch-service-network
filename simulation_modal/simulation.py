@@ -43,7 +43,7 @@ class Simulation:
                 self._demands_service_end()
                 continue
 
-        self.statistics.calculate_statistics()
+        self.statistics.calculate_statistics(self.systems[1:])
         return self.statistics
 
     def _demand_arrival(self) -> None:
