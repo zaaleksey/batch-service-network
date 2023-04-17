@@ -28,9 +28,7 @@ class System:
         for demand in self.batch.demands:
             demand.service_start_times.append(current_time)
 
-        self.end_service_time = current_time + expovariate(self.batch.size * self.mu)
-        # services_time = sum([expovariate(self.mu) for _ in range(self.batch.size)])
-        # self.end_service_time = current_time + services_time
+        self.end_service_time = current_time + expovariate(self.mu)
         return True
 
     def add_to_queue(self, demand: Demand, current_time: float) -> None:
