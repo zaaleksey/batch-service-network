@@ -47,3 +47,7 @@ class System:
     @property
     def can_occupy(self):
         return self.is_free and len(self.queue) >= self.batch.size
+
+    @classmethod
+    def reset_counter(cls):
+        System.__COUNT = 0
