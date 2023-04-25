@@ -1,3 +1,4 @@
+import itertools
 import logging
 import random
 
@@ -12,14 +13,19 @@ from .statistics import Statistics
 logging.basicConfig(filename="logging.log", level=logging.ERROR, filemode="w")
 
 
-def get_system_with_min_queue_len(systems):
-    ids_with_queue_len = dict(map(lambda system: (system.id, len(system.queue)), systems))
+def get_system_id_with_min_queue_len(systems):
+    ids_with_queue_len = dict(map(lambda system: (system.id, system.queue_len), systems))
     return min(ids_with_queue_len, key=ids_with_queue_len.get)
 
 
-def get_system_with_max_mu(systems):
+def get_system_id_with_smart_choice(systems):
+    top = len(systems) - 1
     ids_with_mu = dict(map(lambda system: (system.id, system.mu), systems))
-    return max(ids_with_mu, key=ids_with_mu.get)
+    top_mu = dict(
+        itertools.islice(dict(sorted(ids_with_mu.items(), key=lambda item: item[1], reverse=True)).items(), top))
+    target_systems = [system for system in systems if system.id in top_mu.keys()]
+    min_queue_len = min([system.queue_len for system in target_systems])
+    return [system.id for system in target_systems if system.queue_len == min_queue_len][0]
 
 
 class Simulation:
@@ -118,8 +124,8 @@ class Simulation:
                 self.statistics.served_demands.append(demand)
             else:
                 if self.with_control:
-                    connected_systems_id.remove(0)
-                    connected_systems = [system for system in self.systems if system.id in connected_systems_id]
+                    connected_systems = [system for system in self.systems if
+                                         system.id in connected_systems_id and system.id != 0]
                     target_system = self.get_target_system(connected_systems)
 
                 logging.debug(f"\t[JUMP] Demand with id {demand.id} arrived in system {target_system}")

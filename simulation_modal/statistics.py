@@ -1,3 +1,10 @@
+def get_u_for_system(system):
+    if len(system.service_times_for_demands) == 0:
+        return 0
+    else:
+        return sum(system.service_times_for_demands) / len(system.service_times_for_demands)
+
+
 class Statistics:
     def __init__(self) -> None:
         self.demands_in_network: list = []
@@ -14,7 +21,7 @@ class Statistics:
         if self.demands_number == 0:
             return
 
-        self.u = list(map(lambda system: sum(system.service_times_for_demands) / len(system.service_times_for_demands), systems))
+        self.u = list(map(get_u_for_system, systems))
         self.u = sorted(list(map(lambda item: (self.u.index(item), item), self.u)), key=lambda item: item[1])
 
         demands_in_network_times = []

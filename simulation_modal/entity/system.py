@@ -48,6 +48,10 @@ class System:
     def can_occupy(self):
         return self.is_free and len(self.queue) >= self.batch.size
 
+    @property
+    def queue_len(self):
+        return len(self.queue)
+
     @classmethod
     def reset_counter(cls):
         System.__COUNT = 0
